@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.linalg import norm
 class Turtle2D:
-    def __init__(self,p0,o0,d,delta):
+    def __init__(self,p0,o0,std_d,std_delta):
         """Initialise a 2D turtle object with an initial position and orientation
 
         Parameters
@@ -14,8 +14,8 @@ class Turtle2D:
         self.p=p0
         # normalize orientation vector
         self.o=o0/norm(o0)
-        self.std_d=d
-        self.std_delta=delta
+        self.std_d=std_d
+        self.std_delta=std_delta
 
     def next_position(self,d=None):
         """Compute the next position of the turtle given current position, current orientation, and a step length d
@@ -38,3 +38,14 @@ class Turtle2D:
         R=np.array([[np.cos(delta),-np.sin(delta)],[np.sin(delta),np.cos(delta)]])
         new_orientation=R@self.o
         return new_orientation
+
+    def step(self,d=None):
+        if d==None:
+            d=self.std_d
+        self.p=self.next_position(d)
+
+    def turn(self,delta=None):
+        if delta==None:
+            delta=self.std_delta
+        self.o=self.next_orientation(delta)
+
