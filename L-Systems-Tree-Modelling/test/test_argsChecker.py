@@ -8,6 +8,23 @@ class argsCheckerTest(unittest.TestCase):
     def test_check_iter(self):
 
         with self.assertRaises(TypeError):
-            self.checkIter(0)
+            argsChecker.checkIter(0)
+
+    def test_checkAngle(self):
+
+        with self.assertRaises(TypeError):
+            argsChecker.checkAngle(-45)
+
+    def test_checkAxiom(self):
+
+        with self.assertRaises(TypeError):
+            argsChecker.checkAxiom('1')
+    
+    def test_checkUpdateStrRecursion(self):
+
+        with self.assertRaises(TypeError):
+            argsChecker.checkUpdateStrRecursion(123)
+
+
 
 
