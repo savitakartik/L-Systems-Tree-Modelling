@@ -20,6 +20,11 @@ class argsCheckerTest(unittest.TestCase):
         with self.assertRaises(TypeError):
             argsChecker.checkAxiom('1')
     
+    def test_checkUpdateStrLetters(self):
+
+        with self.assertRaises(TypeError):
+            argsChecker.checkUpdateStrLetters("?")
+    
     def test_checkUpdateStrRecursion(self):
 
         with self.assertRaises(TypeError):
