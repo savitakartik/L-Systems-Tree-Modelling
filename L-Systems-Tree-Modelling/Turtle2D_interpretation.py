@@ -75,7 +75,7 @@ class Tree_drawing_2D:
         self.canvas_size=canvas_size
         self.img=255*np.ones((canvas_size[0],canvas_size[1],3))
         self.turtle=turtle
-        self.thickness=5
+        self.thickness=2
         self.color=(255,0,0)
     def cv_coord(self,cartesian_coords):
         cv_coords=np.zeros(cartesian_coords.shape)
