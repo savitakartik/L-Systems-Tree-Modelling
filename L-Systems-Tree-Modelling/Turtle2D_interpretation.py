@@ -83,15 +83,19 @@ class Tree_drawing_2D:
         cv_coords[0]=cartesian_coords[0]
         return cv_coords
     
-    def draw_segment(self,start,end):
+    def draw_segment(self,start,end,segment_type):
         #First, convert between artesian and cv coordinates
         cv_start=self.cv_coord(start)
         cv_end=self.cv_coord(end)
-        self.img=cv2.line(self.img,cv_start.astype(int),cv_end.astype(int),thickness=self.thickness,color=self.color)
+        if segment_type=='branch':
+            self.img=cv2.line(self.img,cv_start.astype(int),cv_end.astype(int),thickness=self.thickness,color=self.color)
+        elif segment_type=='apex':
+            self.img=cv2.line(self.img,cv_start.astype(int),cv_end.astype(int),thickness=self.thickness,color=self.color)
+            self.img=cv2.circle(self.img,cv_end.astype(int),3,color=(0,255,0),thickness=-1)
         #cv2.imshow('img',self.img)
         #cv2.waitKey(0)
+    
     def draw_branch(self,L_string,i):
-
         while i<len(L_string):
             c=L_string[i]
             if c=='[': #New branch is opened
@@ -109,7 +113,11 @@ class Tree_drawing_2D:
             elif c=='F':
                 #Step the turtle forward and draw the corresponding segment
                 new_position=self.turtle.next_position()
-                self.draw_segment(self.turtle.p, new_position)
+                if L_string[i+1]==']':
+                    self.draw_segment(self.turtle.p, new_position,segment_type='apex')
+                else :
+                    self.draw_segment(self.turtle.p, new_position,segment_type='branch')
+                    
                 self.turtle.step()
             elif c=='+':
                 #Rotate the turtle orientation
