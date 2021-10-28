@@ -14,6 +14,7 @@ class LSystem:
         """
         # most recent rule applied in case of duplicate keys
         LSystem.rulesDict[myKey] = myValue
+        return LSystem.rulesDict[myKey]
 
     def applyRule(self, beforeChar):
         """
