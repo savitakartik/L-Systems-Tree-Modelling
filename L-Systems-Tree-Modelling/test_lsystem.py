@@ -3,14 +3,18 @@ from lsystem import LSystem
 
 class LSystemTest(unittest.TestCase):
     """
-    Tests the :class:`argsChecker` class.
+    Tests the :class:`LSystem` class.
     """
     def test_addToDict(self):
         axiom='F'
         updateStr="FF-[-F+F+F]+[+F-F-F]"
         testLS = LSystem()
-        testLS.addToDict(axiom, updateStr)
-        assert testLS[axiom] == "FF-[-F+F+F]+[+F-F-F]"
+        assert testLS.addToDict(axiom, updateStr) == "FF-[-F+F+F]+[+F-F-F]"
+    def test_addToDict(self):
+        axiom='F'
+        updateStr="FF-[-F+F+F]+[+F-F-F]"
+        testLS = LSystem()
+        assert testLS.addToDict(axiom, updateStr) == "FF-[-F+F+F]+[+F-F-F]"
 
 
     # def test_checkAngle(self):
