@@ -11,6 +11,6 @@ class Turtle2DTest(unittest.TestCase):
         drawer=Tree_drawing_2D(turtle,(50,50),color_scheme='natural',color_type='sequential')
         test_string='[F[+F][-F[-F]F]F[+F][-F]]'
         drawer.draw_tree(test_string)
-        with self.assertRaises(TypeError):
+        with self.assertWarns(Warning):
             drawer.show_tree()
 
