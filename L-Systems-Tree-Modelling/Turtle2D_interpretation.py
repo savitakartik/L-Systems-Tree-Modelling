@@ -1,6 +1,7 @@
 import numpy as np
 from numpy.linalg import norm
 import cv2
+from matplotlib import cm
 class Turtle2D:
     def __init__(self,p0,o0,std_d,std_delta):
         """Initialise a 2D turtle object with an initial position and orientation
@@ -71,27 +72,60 @@ class Turtle2D:
             raise(TypeError('string argument dir should contain either + (anticlockwise) or - (clockwise)'))
 
 class Tree_drawing_2D:
-    def __init__(self,turtle,canvas_size):
+    def __init__(self,turtle,canvas_size,color_scheme,color_type):
         self.canvas_size=canvas_size
         self.img=255*np.ones((canvas_size[0],canvas_size[1],3))
         self.turtle=turtle
         self.thickness=2
-        self.color=(255,0,0)
+        self.color=(0,0,98)
+        self.branch_count=0
+
+        #Colorschemes
+        self.color_scheme=color_scheme
+        self.color_type=color_type
+
+        if self.color_scheme=='natural':
+            self.branch_cmap=cm.get_cmap('copper',1000)
+        elif self.color_scheme=='rainbow':
+            self.branch_cmap=cm.get_cmap('gist_rainbow',1000)
+        self.leaf_cmap=cm.get_cmap('Greens',100)
+    def random_leaf_color(self):
+        color_rgba=self.leaf_cmap(np.random.rand())
+        color_bgr=(color_rgba[2],color_rgba[1],color_rgba[0])
+        return color_bgr
+    def sequential_branch_color(self,k):
+        color_rgba=self.branch_cmap(k)
+        color_bgr=(color_rgba[2],color_rgba[1],color_rgba[0])
+        return color_bgr
+    def random_branch_color(self):
+        color_rgba=self.branch_cmap(np.random.rand())
+        color_bgr=(color_rgba[2],color_rgba[1],color_rgba[0])
+        return color_bgr
     def cv_coord(self,cartesian_coords):
         cv_coords=np.zeros(cartesian_coords.shape)
         cv_coords[1]=-cartesian_coords[1]+self.canvas_size[1]
         cv_coords[0]=cartesian_coords[0]
         return cv_coords
     
-    def draw_segment(self,start,end):
-        #First, convert between artesian and cv coordinates
+    def draw_segment(self,start,end,segment_type,n_branches):
+        #First, convert between cartesian and cv coordinates
         cv_start=self.cv_coord(start)
         cv_end=self.cv_coord(end)
-        self.img=cv2.line(self.img,cv_start.astype(int),cv_end.astype(int),thickness=self.thickness,color=self.color)
+        if self.color_type=='sequential':
+            branch_color=self.sequential_branch_color(self.branch_count/n_branches)
+        elif self.color_type=='random':
+            branch_color=self.random_branch_color()
+        if segment_type=='branch':
+            self.img=cv2.line(self.img,cv_start.astype(int),cv_end.astype(int),thickness=self.thickness,color=branch_color)
+        elif segment_type=='apex':
+            leaf_color=self.random_leaf_color()
+            self.img=cv2.line(self.img,cv_start.astype(int),cv_end.astype(int),thickness=self.thickness,color=branch_color)
+            self.img=cv2.circle(self.img,cv_end.astype(int),3,color=leaf_color,thickness=-1)
         #cv2.imshow('img',self.img)
         #cv2.waitKey(0)
-    def draw_branch(self,L_string,i):
-
+    
+    def draw_branch(self,L_string,i,n_branches):
+        self.branch_count+=1
         while i<len(L_string):
             c=L_string[i]
             if c=='[': #New branch is opened
@@ -99,7 +133,7 @@ class Tree_drawing_2D:
                 cur_position=self.turtle.p
                 cur_orientation=self.turtle.o
                 #Draw the branch (reading the string from the next character onwards)
-                new_i=self.draw_branch(L_string,i+1)
+                new_i=self.draw_branch(L_string,i+1,n_branches)
                 #restore the position
                 self.turtle.set_position(cur_position)
                 self.turtle.set_orientation(cur_orientation)
@@ -109,7 +143,11 @@ class Tree_drawing_2D:
             elif c=='F':
                 #Step the turtle forward and draw the corresponding segment
                 new_position=self.turtle.next_position()
-                self.draw_segment(self.turtle.p, new_position)
+                if L_string[i+1]==']':
+                    self.draw_segment(self.turtle.p, new_position,segment_type='apex',n_branches=n_branches)
+                else :
+                    self.draw_segment(self.turtle.p, new_position,segment_type='branch',n_branches=n_branches)
+                    
                 self.turtle.step()
             elif c=='+':
                 #Rotate the turtle orientation
@@ -118,6 +156,20 @@ class Tree_drawing_2D:
                 #Rotate the turtle orientation
                 self.turtle.turn('-')
             i+=1
+    def count_branches(self,L_string):
+        count=0
+        for c in L_string:
+            if c=='[':
+                count+=1
+        return count
+    def draw_tree(self,L_string):
+        self.branch_count=0 #reset branch count
+        #Count branches
+        n_branches=self.count_branches(L_string)
+        #Generate colormap
+
+        self.draw_branch(L_string,0,n_branches)
+
     def show_tree(self):
         cv2.imshow('tree',self.img)
         cv2.waitKey(0)
