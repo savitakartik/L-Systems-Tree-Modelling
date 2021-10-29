@@ -305,6 +305,13 @@ class Window(QWidget):
         drawer = Tree_drawing_2D(turtle, (scrsize, scrsize), int(thickness),int(leafradius),color_scheme=colourscheme, color_type=colourdist)
         drawer.draw_tree("["+treeSeq+"]")
         drawer.show_tree()
+        if (drawer.show_tree()==False):
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("Warning")
+            msg.setInformativeText('Canvas size is too small for the current tree. Please increase the plot size or decrease the turtle stepsize')
+            msg.setWindowTitle("Warning")
+            msg.exec_()
 
 
 if __name__ == "__main__":
