@@ -4,27 +4,55 @@ import os
 
 class argsChecker:
     """
-    Class containing methods to validate user input.
+    Class containing methods to validate user input. 
+    A layer of validation is provided at GUI side, but this class contains methods to further check 
+    arguments passed from GUI.
+    ...
+    Attributes
+    ----------
+    Methods
+    ----------
+        :__init__: constuctor.
+        :checkIter(self, argIter): checks that iterations argument is a valid number.
+        :checkAngle(self, argAngle): checks that the angle of rotation for the turtle step is a valid entry.
+        :checkAxiom(self, argAxiom): checks that the axiom input is present in the dictionary of L-Systems alphabet.
+        :checkUpdateStrLetters(self, argUpdateStr): checks that the update string contains only valid letters.
+        :checkUpdateStrRecursion: checks that the update string is capable of recursion, ie, that it is extendable in further iterations.
     """
     def __init__(self) -> None:
         pass
     
     def checkIter(self, argIter):
-        #check if positive number below 100?
+        """
+        checks that iterations argument is a valid number.
+        :param self: class instance, defaults to self
+        :param argIter: int, required, number of iterations
+        :raises: exception, e
+        """
         try:
             assert (type(argIter) == int and argIter > 0 and argIter <= 100), "Check iterations argument"
         except Exception as e:
             print (e)
 
     def checkAngle(self, argAngle):
-        #check if number b/w 0 and 360
+        """
+        checks that rotation angle is a valid number.
+        :param self: class instance, defaults to self
+        :param argAngle: int, required, rotation angle
+        :raises: exception, e
+        """
         try:
-            assert (type(argAngle) == int and argAngle >= 0 and argAngle < 360), "Check angle argument"
+            assert (type(argAngle) == int and argAngle >= 0 and argAngle < 180), "Check angle argument"
         except Exception as e:
             print (e)
 
     def checkAxiom(self, argAxiom):
-        #check if "F" for now. if program can handle multiple letters in future, update letterSet
+        """
+        checks that the axiom is present in the dictionary.
+        :param self: class instance, defaults to self
+        :param argAxiom: string, required, axiom letter
+        :raises: exception, e
+        """
         try:
             letterSet=['F']
             assert (type(argAxiom) == str and len(argAxiom) == 1 and argAxiom in letterSet), "Check axiom argument"
@@ -32,7 +60,12 @@ class argsChecker:
             print (e)
     
     def checkUpdateStrLetters(self, argUpdateStr):
-        #check if each char in set of dictionary letters
+        """
+        checks that the update string symbols are each present in the dictionary.
+        :param self: class instance, defaults to self
+        :param argupdateStr: string, update string
+        :raises: exception, e
+        """
         charSet=['F','+','-','[',']']
         try:
             for char in argUpdateStr:
@@ -43,6 +76,12 @@ class argsChecker:
             print (e)
 
     def checkUpdateStrRecursion(self, argUpdateStr):
+        """
+        checks that the update string is capable of extension.
+        :param self: class instance, defaults to self
+        :param argupdateStr: string, update string
+        :raises: exception, e
+        """
         #check that updateStr provides the possibility to expand - should contain 'F'
         #rewrite input as array to include multiple constants
         #if program can handle multiple letters, it is sufficient if any one of the updateStrs contain a constant
@@ -57,64 +96,3 @@ class argsChecker:
         #return ifExists
         except Exception as e:
             print (e)
-
-    #quick tests
-    #print(checkIter(100)) #valid
-    #print(checkIter(0)) #invalid
-    #print(checkIter(10)) #valid
-    #print(checkIter(101)) #invalid
-    #print(checkIter(1)) #valid
-    #print(checkIter('A')) #invalid
-    
-    #print(checkAngle(360))
-    #print(checkAngle(0))
-    #print(checkAngle(45))
-    #print(checkAngle(-45))
-    #print(checkAngle('A'))
-
-    #print(checkAxiom('F'))
-    #print(checkAxiom('A'))
-    #print(checkAxiom('FF'))
-    #print(checkAxiom('ABC'))
-    #print(checkAxiom(1))
-    #print(checkAxiom('+'))
-
-    #print(checkUpdateStrLetters('ABC'))
-    #print(checkUpdateStrLetters('+'))
-    #print(checkUpdateStrLetters('[F+]'))
-    #print(checkUpdateStrLetters('[F+-]'))
-    #print(checkUpdateStrLetters('F+@'))
-    #print(checkUpdateStrLetters('123'))
-
-    #print('####')
-    #print(checkUpdateStrRecursion('F'))
-    #print(checkUpdateStrRecursion('AF'))
-    #print(checkUpdateStrRecursion('F+-[]'))
-    #print(checkUpdateStrRecursion('[+=]'))
-    #print(checkUpdateStrRecursion('1'))
-    #print(checkUpdateStrRecursion(123))
-
-#input:
-#display dict: alphabet:1-26, symbols
-#how many alphabet? n 
-#show A,B,C...n
-#axiom? 
-#check it is subset of user input for alphabet
-#for each letter, ask for an update string
-#check that each symbol is a subset of symbol/alphabet set
-#check there is at least one letter from alphabet in update string overall
-#ask number of iterations
-#check negative number, non-number etc
-#ask angle of rotation
-#don't do anything
-
-
-#dictionary:
-#ALPHABET: 
-#UPDATE DICT - construct a string for each alphabet letter you have chosen, based on the Turtle pattern you wish to use (no need to replace with anything for these)
-#+
-#-
-# [
-# ] 
-
-#for now assuming one letter F as alphabet

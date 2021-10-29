@@ -11,7 +11,6 @@ import numpy as np
 from re import search
 import os
 
-
 class Window(QWidget):
     """ A class to represent atributes of the main L-Systems Tree GUI window 
         ...
@@ -37,14 +36,9 @@ class Window(QWidget):
     def makeGUI(self):
         """
         Sets up the main and children GUI layouts and widgets within.
-        Parameters
-        ----------
-        self : 
-            class instance
-        
-        Returns
-        ----------
-        nothing
+        :param self: class instance, defaults to self
+        :return: none
+        :raises: none
         """
         self.setWindowTitle('L-Systems Tree Modeller')
         # set layouts for widgets and groups
@@ -79,9 +73,6 @@ class Window(QWidget):
         mainLayout.addLayout(layoutGo)
         # add widgets...
         # ...for L-system parameters
-
-
-        
         #imgLabel2 = QLabel(self)
         #pixmap = QPixmap('L-Systems-Tree-Modelling/exampleTreeVerticalSmall2.png')
         #imgLabel2.setPixmap(pixmap)
@@ -227,7 +218,7 @@ class Window(QWidget):
         # slider for step size
         layoutTree.addWidget(QLabel('Turtle step size:'))
         self.ssslider = QSlider(Qt.Horizontal)
-        self.ssslider.setRange(1, 10)
+        self.ssslider.setRange(1, 20)
         self.ssslider.setValue(5)
         self.ssslider.setTickPosition(QSlider.TicksBelow)
         self.ssslider.setTickInterval(5)
@@ -269,14 +260,9 @@ class Window(QWidget):
     def dictionary(self):
         """
         Displays desciption of symbols in the L-System dictionary and their meanings.
-        Parameters
-        ----------
-        self : 
-            class instance
-        
-        Returns
-        ----------
-        nothing
+        :param self: class instance, defaults to self
+        :return: none
+        :raises: none
         """
         mbox = QMessageBox(self)
         mbox.setWindowTitle("Dictionary")
@@ -289,64 +275,40 @@ class Window(QWidget):
     def updateltSliderLabel(self, value):
         """
         Displays current value on line-thickness-slider change.
-        Parameters
-        ----------
-        self : 
-            class instance
-        value :
-            Current slider value
-        
-        Returns
-        ----------
-        nothing
+        :param self: class instance, defaults to self
+        :param value: string, required, current slider value
+        :return: none
+        :raises: none
         """
         self.ltsliderabel.setText(str(value))
 
     def updatelrsliderLabel(self, value):        
         """
         Displays current value on leaf-radius-slider change.
-        Parameters
-        ----------
-        self : 
-            class instance
-        value :
-            Current slider value
-        
-        Returns
-        ----------
-        nothing
+        :param self: class instance, defaults to self
+        :param value: string, required, current slider value
+        :return: none
+        :raises: none
         """
         self.lrsliderlabel.setText(str(value))
 
     def updatessSliderLabel(self, value):
         """
         Displays current value on step-size-slider change.
-        Parameters
-        ----------
-        self : 
-            class instance
-        value :
-            Current slider value
-        
-        Returns
-        ----------
-        nothing
+        :param self: class instance, defaults to self
+        :param value: string, required, current slider value
+        :return: none
+        :raises: none
         """
         self.sssliderabel.setText(str(value))
 
     def updatescrsizeSliderLabel(self, value):
         """
         Displays current value on screen-size-slider change.
-        Parameters
-        ----------
-        self : 
-            class instance
-        value :
-            Current slider value
-        
-        Returns
-        ----------
-        nothing
+        :param self: class instance, defaults to self
+        :param value: string, required, current slider value
+        :return: none
+        :raises: none
         """
         self.scrsizesliderlabel.setText(str(value))
 
@@ -354,14 +316,9 @@ class Window(QWidget):
     def ongobtnClick(self):
         """
         Event handling for 'Go!' button click- collects widget values and calls L-System, Turtle modules.
-        Parameters
-        ----------
-        self : 
-            class instance
-        
-        Returns
-        ----------
-        nothing
+        :param self: class instance, defaults to self
+        :return: none
+        :raises: none
         """
         axiom = 'F'
         frule = self.frulebox.text()
