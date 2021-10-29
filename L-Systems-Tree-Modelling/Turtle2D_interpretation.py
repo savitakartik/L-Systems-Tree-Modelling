@@ -184,8 +184,12 @@ class Tree_drawing_2D:
     def show_tree(self):
         if self.canvas_size[0]<2*self.biggest_x or self.canvas_size[1]<self.biggest_y:
             warnings.warn('Canvas size is too small for the current tree. Please increase the plot size or decrease the turtle stepsize')
-            return False
+            flag=False
+            return flag
+        cv2.startWindowThread()
         cv2.imshow('tree',self.img)
         cv2.waitKey(0)
-        return True
+        cv2.destroyAllWindows()
+        flag=True
+        #return flag
 
