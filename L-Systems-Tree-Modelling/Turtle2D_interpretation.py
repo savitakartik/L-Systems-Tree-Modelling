@@ -72,11 +72,12 @@ class Turtle2D:
             raise(TypeError('string argument dir should contain either + (anticlockwise) or - (clockwise)'))
 
 class Tree_drawing_2D:
-    def __init__(self,turtle,canvas_size,color_scheme,color_type):
+    def __init__(self,turtle,canvas_size,thickness,leaf_radius,color_scheme,color_type):
         self.canvas_size=canvas_size
         self.img=255*np.ones((canvas_size[0],canvas_size[1],3))
         self.turtle=turtle
-        self.thickness=2
+        self.thickness=thickness
+        self.leaf_radius=radius
         self.color=(0,0,98)
         self.branch_count=0
 
@@ -120,7 +121,7 @@ class Tree_drawing_2D:
         elif segment_type=='apex':
             leaf_color=self.random_leaf_color()
             self.img=cv2.line(self.img,cv_start.astype(int),cv_end.astype(int),thickness=self.thickness,color=branch_color)
-            self.img=cv2.circle(self.img,cv_end.astype(int),3,color=leaf_color,thickness=-1)
+            self.img=cv2.circle(self.img,cv_end.astype(int),self.leaf_radius,color=leaf_color,thickness=-1)
         #cv2.imshow('img',self.img)
         #cv2.waitKey(0)
     
