@@ -2,6 +2,7 @@ import numpy as np
 from numpy.linalg import norm
 import cv2
 from matplotlib import cm
+import warnings
 class Turtle2D:
     def __init__(self,p0,o0,std_d,std_delta):
         """Initialise a 2D turtle object with an initial position and orientation
@@ -72,7 +73,7 @@ class Turtle2D:
             raise(TypeError('string argument dir should contain either + (anticlockwise) or - (clockwise)'))
 
 class Tree_drawing_2D:
-    def __init__(self,turtle,canvas_size,thickness,leaf_radius,color_scheme,color_type):
+    def __init__(self,turtle,canvas_size,thickness,radius,color_scheme,color_type):
         self.canvas_size=canvas_size
         self.img=255*np.ones((canvas_size[0],canvas_size[1],3))
         self.turtle=turtle
@@ -90,6 +91,10 @@ class Tree_drawing_2D:
         elif self.color_scheme=='rainbow':
             self.branch_cmap=cm.get_cmap('gist_rainbow',1000)
         self.leaf_cmap=cm.get_cmap('Greens',100)
+
+        #tracker variables for greatest displacement of the turtle in the x and y axis. Useful to make sure the screen size is big enough to contain the tree
+        self.biggest_x=0
+        self.biggest_y=0
     def random_leaf_color(self):
         color_rgba=self.leaf_cmap(np.random.rand())
         color_bgr=(color_rgba[2],color_rgba[1],color_rgba[0])
@@ -150,6 +155,11 @@ class Tree_drawing_2D:
                     self.draw_segment(self.turtle.p, new_position,segment_type='branch',n_branches=n_branches)
                     
                 self.turtle.step()
+                #if needed, update the "greater displacement" trackers:
+                if np.abs(self.turtle.p[0]-self.turtle.p0[0])>self.biggest_x:
+                    self.biggest_x=np.abs(self.turtle.p[0]-self.turtle.p0[0])
+                if np.abs(self.turtle.p[1]-self.turtle.p0[1])>self.biggest_y:
+                    self.biggest_y=np.abs(self.turtle.p[1]-self.turtle.p0[1])
             elif c=='+':
                 #Rotate the turtle orientation
                 self.turtle.turn('+')
@@ -172,5 +182,7 @@ class Tree_drawing_2D:
         self.draw_branch(L_string,0,n_branches)
 
     def show_tree(self):
+        if self.canvas_size[0]<2*self.biggest_x or self.canvas_size[1]<self.biggest_y:
+            warnings.warn('Canvas size is too small for the current tree. Please increase the plot size or decrease the turtle stepsize')
         cv2.imshow('tree',self.img)
         cv2.waitKey(0)
