@@ -335,48 +335,47 @@ class Window(QWidget):
         print(axiom, frule, niter, rotation, colourscheme,
               colourdist, thickness, stepsize, scrsize)
 
+        if (self.frulebox.text() == ""):
+            updateErrmsg = QMessageBox()
+            updateErrmsg.setIcon(QMessageBox.Critical)
+            updateErrmsg.setText("Error")
+            updateErrmsg.setInformativeText('Pleae provide an update string.')
+            updateErrmsg.setWindowTitle("Error")
+            updateErrmsg.exec_()
+
         # TODO: implement dialog error if update string contains a letter ind ictionary that is not selected in the checkbox first.
-        #f((not self.check2.isChecked) and (search('+',self.frulebox.text) or search('+',self.xrulebox.text) or search('+',self.minusrulebox.text) )):
-        #if (self.check2.isChecked() == False and (search('+',self.frulebox.text) or search('+',self.xrulebox.text) or search('+',self.minusrulebox.text) )):
-        #    msg = QMessageBox()
-        #    msg.setIcon(QMessageBox.Critical)
-        #    msg.setText("Error")
-        #    msg.setInformativeText('Pleae check your update string: cannot contain '+' unless selected as a constant.')
-        #    msg.setWindowTitle("Error")
-        #    msg.exec_()
+        else:
+            # connect to LSystem code
+            myChecker = val.argsChecker()
+            # TODO change argChecker to check for float
+            myChecker.checkAngle(int(rotation))
+            myChecker.checkIter(int(niter))
+            myChecker.checkUpdateStrLetters(frule)
+            myChecker.checkUpdateStrRecursion(frule)
+            myLS = LS.LSystem()
+            # add update string to dictionary
+            for char in frule:
+                myLS.addToDict(char, char)
+            myLS.addToDict(axiom, frule)
+            # build treeSeq
+            treeSeq = myLS.makeLSystem(int(niter), axiom)
+            # print(treeSeq)
 
-        #else:
-        # connect to LSystem code
-        myChecker = val.argsChecker()
-        # TODO change argChecker to check for float
-        myChecker.checkAngle(int(rotation))
-        myChecker.checkIter(int(niter))
-        myChecker.checkUpdateStrLetters(frule)
-        myChecker.checkUpdateStrRecursion(frule)
-        myLS = LS.LSystem()
-        # add update string to dictionary
-        for char in frule:
-            myLS.addToDict(char, char)
-        myLS.addToDict(axiom, frule)
-        # build treeSeq
-        treeSeq = myLS.makeLSystem(int(niter), axiom)
-        # print(treeSeq)
-
-        # call turtle interpretation: input-string, output-write to jpg
-        # turtle=Turtle2D(p0=np.array([500,0]),o0=np.array([0,1]),std_d=10,std_delta=22.5)
-        turtle = Turtle2D(p0=np.array([scrsize/2, 0]), o0=np.array(
-            [0, 1]), std_d=stepsize, std_delta=rotation)
-        next_position = turtle.next_position()
-        drawer = Tree_drawing_2D(turtle, (scrsize, scrsize), int(thickness),int(leafradius),color_scheme=colourscheme, color_type=colourdist)
-        drawer.draw_tree("["+treeSeq+"]")
-        drawer.show_tree()
-        if (drawer.show_tree()==False):
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Critical)
-            msg.setText("Warning")
-            msg.setInformativeText('Canvas size is too small for the current tree. Please increase the plot size, decrease the turtle stepsize or the number of iterations')
-            msg.setWindowTitle("Warning")
-            msg.exec_()
+            # call turtle interpretation: input-string, output-write to jpg
+            # turtle=Turtle2D(p0=np.array([500,0]),o0=np.array([0,1]),std_d=10,std_delta=22.5)
+            turtle = Turtle2D(p0=np.array([scrsize/2, 0]), o0=np.array(
+                [0, 1]), std_d=stepsize, std_delta=rotation)
+            next_position = turtle.next_position()
+            drawer = Tree_drawing_2D(turtle, (scrsize, scrsize), int(thickness),int(leafradius),color_scheme=colourscheme, color_type=colourdist)
+            drawer.draw_tree("["+treeSeq+"]")
+            drawer.show_tree()
+            if (drawer.show_tree()==False):
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("Warning")
+                msg.setInformativeText('Canvas size is too small for the current tree. Please increase the plot size, decrease the turtle stepsize or the number of iterations')
+                msg.setWindowTitle("Warning")
+                msg.exec_()
 
 
 if __name__ == "__main__":
