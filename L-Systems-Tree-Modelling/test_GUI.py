@@ -1,8 +1,8 @@
 import unittest
 from PyQt5 import *
 import sys
-import L-Systems-Tree-Modelling.GUI
-from L-Systems-Tree-Modelling.GUI import Window
+import GUI
+from GUI import Window
 from PyQt5.QtTest import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
