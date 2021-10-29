@@ -39,12 +39,25 @@ class Window(QWidget):
         # add widgets...
         # ...for L-system parameters
 
-        # layoutLS.addItem(verticalSpacer1)
+        #layoutLS.addItem(verticalSpacer1)
         imgLabel = QLabel(self)
-        pixmap = QPixmap('L-Systems-Tree-Modelling/tree.jpg')
+        pixmap = QPixmap('L-Systems-Tree-Modelling/exampleTreeVerticalSmall.png')
         imgLabel.setPixmap(pixmap)
-        imgLabel.setMaximumSize(150, 50)
+        imgLabel.setMaximumSize(500, 500)
+        #imgLabel.move(200, 0)
+        #imgLabel.setAlignment(Qt.AlignCenter)  
+        #layoutLS.addWidget(imgLabel, alignment=Qt.AlignCenter)
         layoutLS.addWidget(imgLabel)
+        
+        #imgLabel2 = QLabel(self)
+        #pixmap = QPixmap('L-Systems-Tree-Modelling/exampleTreeVerticalSmall2.png')
+        #imgLabel2.setPixmap(pixmap)
+        #imgLabel2.setMaximumSize(50, 100)
+        #imgLabel2.move(200, 0)
+        #imgLabel.setAlignment(Qt.AlignCenter)  
+        #layoutLS.addWidget(imgLabel, alignment=Qt.AlignCenter)
+        #layoutLS.addWidget(imgLabel2)
+        #layoutLS.addItem(verticalSpacer1)
 
         self.labelLSTitle = QLabel("L-System parameters")
         myFont = QFont()
@@ -62,8 +75,9 @@ class Window(QWidget):
 
         # update-string text box for axiom
         layoutLS.addWidget(QLabel('Update string:'))
-        self.frulebox = QLineEdit(self, placeholderText="example: F[+F]F[-F]F")
-        self.frulebox.setText("F[+F]F[-F]F")
+        #self.frulebox = QLineEdit(self, placeholderText="example: F[+F]F[-F]F")
+        self.frulebox = QLineEdit(self, placeholderText="example: F[+F]F[-F][F]")
+        self.frulebox.setText("F[+F]F[-F][F]")
         # Add validator to check if characters are in dictionary and that axiom is present at least once.
         regexPattern = QRegExp("^[F\[\]\+\-]*[F]+[F\[\]\+\-]*$")
         validator = QRegExpValidator(regexPattern)
@@ -117,7 +131,7 @@ class Window(QWidget):
         layoutLS.addWidget(QLabel('Number of iterations:'))
         self.numiterbox = QSpinBox()
         self.numiterbox.setRange(1, 10)
-        self.numiterbox.setValue(4)
+        self.numiterbox.setValue(5)
         layoutLS.addWidget(self.numiterbox)
 
         layoutLS.addItem(verticalSpacer1)
@@ -133,7 +147,7 @@ class Window(QWidget):
         # TODO: accept floating values
         self.anglespinbox = QSpinBox()
         self.anglespinbox.setRange(0, 179)
-        self.anglespinbox.setValue(22)
+        self.anglespinbox.setValue(20)
         layoutTree.addWidget(self.anglespinbox)
 
         # drop-down for colour scheme
@@ -153,15 +167,28 @@ class Window(QWidget):
         # slider for line thickness
         layoutTree.addWidget(QLabel('Line thickness:'))
         self.ltslider = QSlider(Qt.Horizontal)
-        self.ltslider.setRange(1, 10)
-        self.ltslider.setValue(5)
+        self.ltslider.setRange(1, 5)
+        self.ltslider.setValue(2)
         self.ltslider.setTickPosition(QSlider.TicksBelow)
-        self.ltslider.setTickInterval(5)
+        self.ltslider.setTickInterval(1)
         self.ltslider.valueChanged.connect(self.updateltSliderLabel)
-        self.ltsliderabel = QLabel('5', self)
+        self.ltsliderabel = QLabel('2', self)
         layoutTree.addWidget(self.ltsliderabel)
         self.ltsliderabel.setMinimumWidth(80)
         layoutTree.addWidget(self.ltslider)
+
+        # slider for leaf radius
+        layoutTree.addWidget(QLabel('Leaf size:'))
+        self.lrslider = QSlider(Qt.Horizontal)
+        self.lrslider.setRange(1, 10)
+        self.lrslider.setValue(3)
+        self.lrslider.setTickPosition(QSlider.TicksBelow)
+        self.lrslider.setTickInterval(1)
+        self.lrslider.valueChanged.connect(self.updatelrsliderLabel)
+        self.lrsliderlabel = QLabel('3', self)
+        layoutTree.addWidget(self.lrsliderlabel)
+        self.lrsliderlabel.setMinimumWidth(80)
+        layoutTree.addWidget(self.lrslider)
 
         # slider for step size
         layoutTree.addWidget(QLabel('Turtle step size:'))
@@ -180,11 +207,11 @@ class Window(QWidget):
         layoutTree.addWidget(QLabel('Plot dimensions (square):'))
         self.scrsizeslider = QSlider(Qt.Horizontal)
         self.scrsizeslider.setRange(100, 1000)
-        self.scrsizeslider.setValue(500)
+        self.scrsizeslider.setValue(350)
         self.scrsizeslider.setTickPosition(QSlider.TicksBelow)
         self.scrsizeslider.setTickInterval(100)
         self.scrsizeslider.valueChanged.connect(self.updatescrsizeSliderLabel)
-        self.scrsizesliderlabel = QLabel('500', self)
+        self.scrsizesliderlabel = QLabel('350', self)
         #self.label.setAlignment(Qt.AlignCenter | Qt.AlignVCenter)
         layoutTree.addWidget(self.scrsizesliderlabel)
         self.scrsizesliderlabel.setMinimumWidth(80)
@@ -217,6 +244,9 @@ class Window(QWidget):
     def updateltSliderLabel(self, value):
         self.ltsliderabel.setText(str(value))
 
+    def updatelrsliderLabel(self, value):
+        self.lrsliderlabel.setText(str(value))
+
     def updatessSliderLabel(self, value):
         self.sssliderabel.setText(str(value))
 
@@ -232,6 +262,7 @@ class Window(QWidget):
         colourscheme = self.colourschemedd.currentText()
         colourdist = self.colourdistdd.currentText()
         thickness = self.ltslider.value()
+        leafradius = self.lrslider.value()
         stepsize = self.ssslider.value()
         scrsize = self.scrsizeslider.value()
 
@@ -269,10 +300,10 @@ class Window(QWidget):
         # call turtle interpretation: input-string, output-write to jpg
         # turtle=Turtle2D(p0=np.array([500,0]),o0=np.array([0,1]),std_d=10,std_delta=22.5)
         turtle = Turtle2D(p0=np.array([scrsize/2, 0]), o0=np.array(
-            [0, 1]), std_d=stepsize, std_delta=rotation, color_scheme=colourscheme, color_type=colourdist)
+            [0, 1]), std_d=stepsize, std_delta=rotation)
         next_position = turtle.next_position()
-        drawer = Tree_drawing_2D(turtle, (scrsize, scrsize))
-        drawer.draw_tree(treeSeq)
+        drawer = Tree_drawing_2D(turtle, (scrsize, scrsize), int(thickness),int(leafradius),color_scheme=colourscheme, color_type=colourdist)
+        drawer.draw_tree("["+treeSeq+"]")
         drawer.show_tree()
 
 
