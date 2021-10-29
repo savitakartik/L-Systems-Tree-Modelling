@@ -193,5 +193,5 @@ class Tree_drawing_2D:
         cv2.destroyWindow("Tree")
         cv2.waitKey(1)
         flag=True
-        #return flag
+        return flag
 
