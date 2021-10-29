@@ -62,20 +62,21 @@ class Window(QWidget):
         parentLayout.addItem(horizontalSpacer1)
         parentLayout.addLayout(layoutTree)
         mainLayout = QVBoxLayout()
-        mainLayout.addLayout(parentLayout)
-        mainLayout.addLayout(layoutGo)
-        # add widgets...
-        # ...for L-system parameters
-
         #layoutLS.addItem(verticalSpacer1)
         imgLabel = QLabel(self)
-        pixmap = QPixmap('L-Systems-Tree-Modelling/exampleTreeVerticalSmall.png')
+        pixmap = QPixmap('L-Systems-Tree-Modelling/exampleTreeVertical5.png')
         imgLabel.setPixmap(pixmap)
         imgLabel.setMaximumSize(500, 500)
         #imgLabel.move(200, 0)
         #imgLabel.setAlignment(Qt.AlignCenter)  
         #layoutLS.addWidget(imgLabel, alignment=Qt.AlignCenter)
-        layoutLS.addWidget(imgLabel)
+        mainLayout.addWidget(imgLabel)
+        mainLayout.addLayout(parentLayout)
+        mainLayout.addLayout(layoutGo)
+        # add widgets...
+        # ...for L-system parameters
+
+
         
         #imgLabel2 = QLabel(self)
         #pixmap = QPixmap('L-Systems-Tree-Modelling/exampleTreeVerticalSmall2.png')
@@ -166,6 +167,7 @@ class Window(QWidget):
 
         # ...for tree parameters
         # text box for angle
+        #layoutTree.addWidget(imgLabel)
         self.labelTreeTitle = QLabel("Tree parameters")
         myFont = QFont()
         myFont.setBold(True)
@@ -411,7 +413,7 @@ class Window(QWidget):
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
             msg.setText("Warning")
-            msg.setInformativeText('Canvas size is too small for the current tree. Please increase the plot size or decrease the turtle stepsize')
+            msg.setInformativeText('Canvas size is too small for the current tree. Please increase the plot size, decrease the turtle stepsize or the number of iterations')
             msg.setWindowTitle("Warning")
             msg.exec_()
 
