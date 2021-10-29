@@ -9,6 +9,7 @@ from Turtle2D_interpretation import *
 import cv2
 import numpy as np
 from re import search
+import os
 
 
 class Window(QWidget):
@@ -64,7 +65,10 @@ class Window(QWidget):
         mainLayout = QVBoxLayout()
         #layoutLS.addItem(verticalSpacer1)
         imgLabel = QLabel(self)
-        pixmap = QPixmap('L-Systems-Tree-Modelling/exampleTreeVertical5.png')
+        path = os.path.dirname(os.path.abspath('__file__'))
+        #imgLabel.setPixmap(QPixmap(os.path.join(path, 'exampleTreeVertical5.png')))
+        #pixmap = QPixmap('L-Systems-Tree-Modelling/exampleTreeVertical5.png')
+        pixmap = QPixmap(os.path.join(path, 'exampleTreeVertical5.png'))
         imgLabel.setPixmap(pixmap)
         imgLabel.setMaximumSize(500, 500)
         #imgLabel.move(200, 0)
