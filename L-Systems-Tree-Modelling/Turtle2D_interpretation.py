@@ -72,11 +72,11 @@ class Turtle2D:
             raise(TypeError('string argument dir should contain either + (anticlockwise) or - (clockwise)'))
 
 class Tree_drawing_2D:
-    def __init__(self,turtle,canvas_size,color_scheme,color_type):
+    def __init__(self,turtle,canvas_size,thickness,color_scheme,color_type):
         self.canvas_size=canvas_size
         self.img=255*np.ones((canvas_size[0],canvas_size[1],3))
         self.turtle=turtle
-        self.thickness=2
+        self.thickness=thickness
         self.color=(0,0,98)
         self.branch_count=0
 
