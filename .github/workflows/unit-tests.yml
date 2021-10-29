@@ -26,4 +26,5 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with unittest
       run: |
-        python -m unittest GUI_test.py test_Turtle2D_Interpreter.py test_lsystem.py test_ArgsChecker.py
+        cd ..
+        python -m unittest 
