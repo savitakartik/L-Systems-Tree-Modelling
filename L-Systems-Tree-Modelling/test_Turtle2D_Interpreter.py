@@ -9,7 +9,6 @@ class Turtle2DTest(unittest.TestCase):
     def test_show_tree(self):
         turtle=Turtle2D(p0=np.array([250,0]),o0=np.array([0,1]),std_d=10,std_delta=29.5)
         drawer=Tree_drawing_2D(turtle,(3,3),2,3,color_scheme='natural',color_type='sequential')
-    
         test_string='[F[+F][-F[-F]F]F[+F][-F]]'
         drawer.draw_tree(test_string)
         self.assertEqual(drawer.show_tree(),False)

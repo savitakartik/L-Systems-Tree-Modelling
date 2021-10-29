@@ -1,6 +1,6 @@
+import sys
 import unittest
 from PyQt5 import *
-import sys
 import GUI
 from GUI import Window
 from PyQt5.QtTest import *
