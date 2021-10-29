@@ -1,0 +1,81 @@
+:py:mod:`Turtle2D_interpretation`
+=================================
+
+.. py:module:: Turtle2D_interpretation
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   Turtle2D_interpretation.Turtle2D
+   Turtle2D_interpretation.Tree_drawing_2D
+
+
+
+
+.. py:class:: Turtle2D(p0, o0, std_d, std_delta)
+
+   .. py:method:: set_position(self, p)
+
+
+   .. py:method:: set_orientation(self, o)
+
+
+   .. py:method:: reset(self)
+
+
+   .. py:method:: next_position(self, d=None)
+
+      Compute the next position of the turtle given current position, current orientation, and a step length d
+
+      Parameters
+      ----------
+      :d:  float, stepsize. If not specified, the standard stepsize of the turtle is used
+      :returns: next position of the turtle, as a numpy array
+
+
+   .. py:method:: next_orientation(self, delta=None)
+
+
+   .. py:method:: step(self, d=None)
+
+
+   .. py:method:: turn(self, dir, delta=None)
+
+
+
+.. py:class:: Tree_drawing_2D(turtle, canvas_size, thickness, radius, color_scheme, color_type)
+
+   .. py:method:: random_leaf_color(self)
+
+
+   .. py:method:: sequential_branch_color(self, k)
+
+
+   .. py:method:: random_branch_color(self)
+
+
+   .. py:method:: cv_coord(self, cartesian_coords)
+
+
+   .. py:method:: draw_segment(self, start, end, segment_type, n_branches)
+
+
+   .. py:method:: draw_branch(self, L_string, i, n_branches)
+
+
+   .. py:method:: count_branches(self, L_string)
+
+
+   .. py:method:: draw_tree(self, L_string)
+
+
+   .. py:method:: show_tree(self)
+
+
+

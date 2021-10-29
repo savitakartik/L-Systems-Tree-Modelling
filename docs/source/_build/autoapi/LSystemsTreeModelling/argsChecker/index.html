@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>L-Systems-Tree-Modelling.argsChecker &#8212; L-Systems Tree Modelling 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-L-Systems-Tree-Modelling.argsChecker">
+<span id="l-systems-tree-modelling-argschecker"></span><h1><a class="reference internal" href="#module-L-Systems-Tree-Modelling.argsChecker" title="L-Systems-Tree-Modelling.argsChecker"><code class="xref py py-mod docutils literal notranslate"><span class="pre">L-Systems-Tree-Modelling.argsChecker</span></code></a><a class="headerlink" href="#module-L-Systems-Tree-Modelling.argsChecker" title="Permalink to this headline">¶</a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#L-Systems-Tree-Modelling.argsChecker.argsChecker" title="L-Systems-Tree-Modelling.argsChecker.argsChecker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">argsChecker</span></code></a></p></td>
+<td><p>Class containing methods to validate user input.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="L-Systems-Tree-Modelling.argsChecker.argsChecker">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">L-Systems-Tree-Modelling.argsChecker.</span></span><span class="sig-name descname"><span class="pre">argsChecker</span></span><a class="headerlink" href="#L-Systems-Tree-Modelling.argsChecker.argsChecker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class containing methods to validate user input.
+A layer of validation is provided at GUI side, but this class contains methods to further check
+arguments passed from GUI.
+…
+Attributes
+———-
+Methods
+———-</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">__init__</dt>
+<dd class="field-odd"><p>constuctor.</p>
+</dd>
+<dt class="field-even">checkIter(self, argIter)</dt>
+<dd class="field-even"><p>checks that iterations argument is a valid number.</p>
+</dd>
+<dt class="field-odd">checkAngle(self, argAngle)</dt>
+<dd class="field-odd"><p>checks that the angle of rotation for the turtle step is a valid entry.</p>
+</dd>
+<dt class="field-even">checkAxiom(self, argAxiom)</dt>
+<dd class="field-even"><p>checks that the axiom input is present in the dictionary of L-Systems alphabet.</p>
+</dd>
+<dt class="field-odd">checkUpdateStrLetters(self, argUpdateStr)</dt>
+<dd class="field-odd"><p>checks that the update string contains only valid letters.</p>
+</dd>
+<dt class="field-even">checkUpdateStrRecursion</dt>
+<dd class="field-even"><p>checks that the update string is capable of recursion, ie, that it is extendable in further iterations.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="L-Systems-Tree-Modelling.argsChecker.argsChecker.checkIter">
+<span class="sig-name descname"><span class="pre">checkIter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argIter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#L-Systems-Tree-Modelling.argsChecker.argsChecker.checkIter" title="Permalink to this definition">¶</a></dt>
+<dd><p>checks that iterations argument is a valid number.
+:param self: class instance, defaults to self
+:param argIter: int, required, number of iterations
+:raises: exception, e</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="L-Systems-Tree-Modelling.argsChecker.argsChecker.checkAngle">
+<span class="sig-name descname"><span class="pre">checkAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argAngle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#L-Systems-Tree-Modelling.argsChecker.argsChecker.checkAngle" title="Permalink to this definition">¶</a></dt>
+<dd><p>checks that rotation angle is a valid number.
+:param self: class instance, defaults to self
+:param argAngle: int, required, rotation angle
+:raises: exception, e</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="L-Systems-Tree-Modelling.argsChecker.argsChecker.checkAxiom">
+<span class="sig-name descname"><span class="pre">checkAxiom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argAxiom</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#L-Systems-Tree-Modelling.argsChecker.argsChecker.checkAxiom" title="Permalink to this definition">¶</a></dt>
+<dd><p>checks that the axiom is present in the dictionary.
+:param self: class instance, defaults to self
+:param argAxiom: string, required, axiom letter
+:raises: exception, e</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="L-Systems-Tree-Modelling.argsChecker.argsChecker.checkUpdateStrLetters">
+<span class="sig-name descname"><span class="pre">checkUpdateStrLetters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argUpdateStr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#L-Systems-Tree-Modelling.argsChecker.argsChecker.checkUpdateStrLetters" title="Permalink to this definition">¶</a></dt>
+<dd><p>checks that the update string symbols are each present in the dictionary.
+:param self: class instance, defaults to self
+:param argupdateStr: string, update string
+:raises: exception, e</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="L-Systems-Tree-Modelling.argsChecker.argsChecker.checkUpdateStrRecursion">
+<span class="sig-name descname"><span class="pre">checkUpdateStrRecursion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argUpdateStr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#L-Systems-Tree-Modelling.argsChecker.argsChecker.checkUpdateStrRecursion" title="Permalink to this definition">¶</a></dt>
+<dd><p>checks that the update string is capable of extension.
+:param self: class instance, defaults to self
+:param argupdateStr: string, update string
+:raises: exception, e</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">L-Systems Tree Modelling</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Viktoria Brunner, Marco Corrao, Jeanne Inchuaspe, Savita Karthikeyan, Wenqi Zhu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../_sources/autoapi/LSystemsTreeModelling/argsChecker/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

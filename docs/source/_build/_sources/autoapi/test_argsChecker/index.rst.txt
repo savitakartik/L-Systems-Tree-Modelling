@@ -1,0 +1,41 @@
+:py:mod:`test_argsChecker`
+==========================
+
+.. py:module:: test_argsChecker
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   test_argsChecker.argsCheckerTest
+
+
+
+
+.. py:class:: argsCheckerTest(methodName='runTest')
+
+   Bases: :py:obj:`unittest.TestCase`
+
+   Tests the :class:`argsChecker` class.
+
+   .. py:method:: test_check_iter(self)
+
+
+   .. py:method:: test_checkAngle(self)
+
+
+   .. py:method:: test_checkAxiom(self)
+
+
+   .. py:method:: test_checkUpdateStrLetters(self)
+
+
+   .. py:method:: test_checkUpdateStrRecursion(self)
+
+
+

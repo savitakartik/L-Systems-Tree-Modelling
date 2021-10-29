@@ -1,0 +1,114 @@
+:py:mod:`L-Systems-Tree-Modelling.GUI`
+======================================
+
+.. py:module:: L-Systems-Tree-Modelling.GUI
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   L-Systems-Tree-Modelling.GUI.Window
+
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   L-Systems-Tree-Modelling.GUI.app
+
+
+.. py:class:: Window
+
+   Bases: :py:obj:`QWidget`
+
+   A class to represent atributes of the main L-Systems Tree GUI window 
+   ...
+
+   Attributes
+   ----------
+   Methods
+   ----------
+   :__init__: constuctor calls the method that creates and displays the main GUI window.
+   :makeGUI(self): method sets up the layout and widgets 
+   :dictionary(self): method to show the L-Systems alphabet dictionary value.
+   :updateltSliderLabel(self, value): method to display line thickness slider value.
+   :updatelrsliderLabel(self, value): method to display leaf radius slider value.
+   :updatessSliderLabel(self, value): method to display step size slider value.
+   :updatescrsizeSliderLabel(self, value): method to display screen size slider value.
+   :ongobtnClick(self): method to handle 'Go!' button click
+   :__main__: method where execution starts.
+
+   .. py:method:: makeGUI(self)
+
+      Sets up the main and children GUI layouts and widgets within.
+      :param self: class instance, defaults to self
+      :return: none
+      :raises: none
+
+
+   .. py:method:: dictionary(self)
+
+      Displays desciption of symbols in the L-System dictionary and their meanings.
+      :param self: class instance, defaults to self
+      :return: none
+      :raises: none
+
+
+   .. py:method:: updateltSliderLabel(self, value)
+
+      Displays current value on line-thickness-slider change.
+      :param self: class instance, defaults to self
+      :param value: string, required, current slider value
+      :return: none
+      :raises: none
+
+
+   .. py:method:: updatelrsliderLabel(self, value)
+
+      Displays current value on leaf-radius-slider change.
+      :param self: class instance, defaults to self
+      :param value: string, required, current slider value
+      :return: none
+      :raises: none
+
+
+   .. py:method:: updatessSliderLabel(self, value)
+
+      Displays current value on step-size-slider change.
+      :param self: class instance, defaults to self
+      :param value: string, required, current slider value
+      :return: none
+      :raises: none
+
+
+   .. py:method:: updatescrsizeSliderLabel(self, value)
+
+      Displays current value on screen-size-slider change.
+      :param self: class instance, defaults to self
+      :param value: string, required, current slider value
+      :return: none
+      :raises: none
+
+
+   .. py:method:: ongobtnClick(self)
+
+      Event handling for 'Go!' button click- collects widget values and calls L-System, Turtle modules.
+      :param self: class instance, defaults to self
+      :return: none
+      :raises: none
+
+
+
+.. py:data:: app
+   
+
+   
+

@@ -1,0 +1,77 @@
+:py:mod:`L-Systems-Tree-Modelling.argsChecker`
+==============================================
+
+.. py:module:: L-Systems-Tree-Modelling.argsChecker
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   L-Systems-Tree-Modelling.argsChecker.argsChecker
+
+
+
+
+.. py:class:: argsChecker
+
+   Class containing methods to validate user input. 
+   A layer of validation is provided at GUI side, but this class contains methods to further check 
+   arguments passed from GUI.
+   ...
+   Attributes
+   ----------
+   Methods
+   ----------
+       :__init__: constuctor.
+       :checkIter(self, argIter): checks that iterations argument is a valid number.
+       :checkAngle(self, argAngle): checks that the angle of rotation for the turtle step is a valid entry.
+       :checkAxiom(self, argAxiom): checks that the axiom input is present in the dictionary of L-Systems alphabet.
+       :checkUpdateStrLetters(self, argUpdateStr): checks that the update string contains only valid letters.
+       :checkUpdateStrRecursion: checks that the update string is capable of recursion, ie, that it is extendable in further iterations.
+
+   .. py:method:: checkIter(self, argIter)
+
+      checks that iterations argument is a valid number.
+      :param self: class instance, defaults to self
+      :param argIter: int, required, number of iterations
+      :raises: exception, e
+
+
+   .. py:method:: checkAngle(self, argAngle)
+
+      checks that rotation angle is a valid number.
+      :param self: class instance, defaults to self
+      :param argAngle: int, required, rotation angle
+      :raises: exception, e
+
+
+   .. py:method:: checkAxiom(self, argAxiom)
+
+      checks that the axiom is present in the dictionary.
+      :param self: class instance, defaults to self
+      :param argAxiom: string, required, axiom letter
+      :raises: exception, e
+
+
+   .. py:method:: checkUpdateStrLetters(self, argUpdateStr)
+
+      checks that the update string symbols are each present in the dictionary.
+      :param self: class instance, defaults to self
+      :param argupdateStr: string, update string
+      :raises: exception, e
+
+
+   .. py:method:: checkUpdateStrRecursion(self, argUpdateStr)
+
+      checks that the update string is capable of extension.
+      :param self: class instance, defaults to self
+      :param argupdateStr: string, update string
+      :raises: exception, e
+
+
+

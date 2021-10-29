@@ -1,0 +1,175 @@
+:py:mod:`L-Systems-Tree-Modelling.Turtle2D_interpretation`
+==========================================================
+
+.. py:module:: L-Systems-Tree-Modelling.Turtle2D_interpretation
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   L-Systems-Tree-Modelling.Turtle2D_interpretation.Turtle2D
+   L-Systems-Tree-Modelling.Turtle2D_interpretation.Tree_drawing_2D
+
+
+
+
+.. py:class:: Turtle2D(p0, o0, std_d, std_delta)
+
+   .. py:method:: set_position(self, p)
+
+      move the turtle to a specified position
+      Parameters
+      --------
+      :p: required, numpy.array, vector encoding the new osition of the turtle ([x,y])
+
+
+   .. py:method:: set_orientation(self, o)
+
+      turns the turtle to a specified orientation
+      Parameters
+      --------
+      :o: required, numpy.array, vector encoding the new orientation of the turtle
+
+
+   .. py:method:: reset(self)
+
+      Reset the position and orientation of the turtle to the ininal condition specified at initialisation
+      Parameters
+      --------
+
+
+   .. py:method:: next_position(self, d=None)
+
+      Compute the next position of the turtle given current position, current orientation, and a step length d
+
+      Parameters
+      ----------
+      :d:  float, stepsize. If not specified, the standard stepsize of the turtle (specified at initialisation) is used.
+      :returns: next position of the turtle, as a numpy array
+
+
+   .. py:method:: next_orientation(self, delta=None)
+
+      Compute the next orientation of the turtle given current orientation and a turning angle length delta.
+      If the turning angle is not specified, the standard turning angle specified at initialisation is used
+
+      Parameters
+      ----------
+      :d:  float, stepsize. If not specified, the standard stepsize of the turtle is used
+      :returns: next orientation of the turtle, as a numpy array
+
+
+   .. py:method:: step(self, d=None)
+
+      updates the position of the turtle from its current position to a new one, one stepsize away in the current orientation direction
+
+      Parameters
+      ----------
+      :d:  float, stepsize. If not specified, the standard stepsize of the turtle is used
+
+
+   .. py:method:: turn(self, dir, delta=None)
+
+      Update the orientation of the turtle from the current orientation to a new one, computed by rotating the turtle of a given amount
+      If the turning angle is not specified, the standard turning angle specified at initialisation is used
+
+      Parameters
+      ----------
+      :dir: string, either '+' or '-', direction of turning ('+' for counterclockwise, '-' for clockwise)
+      :delta:  float, turning angle. If not specified, the standard turning angle of the turtle (defined at initialisation) is used
+
+
+
+.. py:class:: Tree_drawing_2D(turtle, canvas_size, thickness, radius, color_scheme, color_type)
+
+   .. py:method:: random_leaf_color(self)
+
+      Generate a random color for a leaf from the 'Greens'matplotlib colorscheme
+              
+
+
+   .. py:method:: sequential_branch_color(self, k)
+
+      Generate a  color for a branch from the chosen colorscheme (selected at initialisation), using the index k (between 0 and 1)
+              
+
+
+   .. py:method:: random_branch_color(self)
+
+      Generate a random color for a branch from the chosen colorscheme (selected at initialisation)
+              
+
+
+   .. py:method:: cv_coord(self, cartesian_coords)
+
+      converts between cartesian coordinates and the openCV coordinate system (which places the origin on the top left of the image)
+
+      Parameters
+      ----------
+      :cartesian_coords: numpy.array, cartesian coordinates vector 
+      :returns: openCV format coordinate vector
+
+
+
+   .. py:method:: draw_segment(self, start, end, segment_type, n_branches)
+
+      draw a segment of the tree
+
+      Parameters
+      ----------
+      :start: numpy.array, cartesian coordinates vector of the branch start point
+      :start: numpy.array, cartesian coordinates vector of the branch end point
+      :segment_type: string, 'branch'or 'apex', type of segment to be drawn (if apex, a leaf will be attached at the end)
+      :n_branches: integer,total number of branches in the tree, used to draw a color from the colorscheme
+
+
+
+   .. py:method:: draw_branch(self, L_string, i, n_branches)
+
+      draw a branch of the tree
+
+      Parameters
+      ----------
+      :L_string: string, L-string from which the branch is read from
+      :i: integer, index from which to read the L-string 
+      :n_branches: integer,total number of branches in the tree, used to draw a color from the colorscheme
+
+
+
+   .. py:method:: count_branches(self, L_string)
+
+      count the total number of branches in a tree
+
+      Parameters
+      ----------
+      :L_string: string, L-string specifying a tree
+      :returns: total number of branches in the tree
+
+
+
+   .. py:method:: draw_tree(self, L_string)
+
+      draw the tree
+
+      Parameters
+      ----------
+      :L_string: string, L-string specifying a tree to be drawn
+
+
+
+   .. py:method:: show_tree(self)
+
+      Display the tree in a new window
+
+      Parameters
+      ----------
+      :L_string: string, L-string specifying a tree to be drawn
+
+
+
+
