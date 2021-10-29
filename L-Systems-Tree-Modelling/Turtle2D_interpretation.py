@@ -191,6 +191,7 @@ class Tree_drawing_2D:
         cv2.imshow('Tree',self.img)
         cv2.waitKey(0)
         cv2.destroyWindow("Tree")
+        cv2.waitKey(1)
         flag=True
         #return flag
 
