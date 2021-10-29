@@ -188,6 +188,7 @@ class Tree_drawing_2D:
             return flag
         cv2.imshow('tree',self.img)
         cv2.waitKey(0)
+        cv2.destroyAllWindows()
         flag=True
         #return flag
 
