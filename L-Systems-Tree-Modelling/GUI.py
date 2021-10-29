@@ -12,11 +12,39 @@ from re import search
 
 
 class Window(QWidget):
+    """ A class to represent atributes of the main L-Systems Tree GUI window 
+        ...
+
+        Attributes
+        ----------
+        Methods
+        ----------
+        :__init__: constuctor calls the method that creates and displays the main GUI window.
+        :makeGUI(self): method sets up the layout and widgets 
+        :dictionary(self): method to show the L-Systems alphabet dictionary value.
+        :updateltSliderLabel(self, value): method to display line thickness slider value.
+        :updatelrsliderLabel(self, value): method to display leaf radius slider value.
+        :updatessSliderLabel(self, value): method to display step size slider value.
+        :updatescrsizeSliderLabel(self, value): method to display screen size slider value.
+        :ongobtnClick(self): method to handle 'Go!' button click
+        :__main__: method where execution starts.
+        """
     def __init__(self):
         super().__init__()
         self.makeGUI()
 
     def makeGUI(self):
+        """
+        Sets up the main and children GUI layouts and widgets within.
+        Parameters
+        ----------
+        self : 
+            class instance
+        
+        Returns
+        ----------
+        nothing
+        """
         self.setWindowTitle('L-Systems Tree Modeller')
         # set layouts for widgets and groups
         layoutLS1 = QVBoxLayout()
@@ -233,6 +261,17 @@ class Window(QWidget):
         self.setLayout(mainLayout)
 
     def dictionary(self):
+        """
+        Displays desciption of symbols in the L-System dictionary and their meanings.
+        Parameters
+        ----------
+        self : 
+            class instance
+        
+        Returns
+        ----------
+        nothing
+        """
         mbox = QMessageBox(self)
         mbox.setWindowTitle("Dictionary")
         mbox.setText("Available symbols: F,  +,  -,  [ ]")
@@ -242,19 +281,82 @@ class Window(QWidget):
         mbox.exec_()
 
     def updateltSliderLabel(self, value):
+        """
+        Displays current value on line-thickness-slider change.
+        Parameters
+        ----------
+        self : 
+            class instance
+        value :
+            Current slider value
+        
+        Returns
+        ----------
+        nothing
+        """
         self.ltsliderabel.setText(str(value))
 
-    def updatelrsliderLabel(self, value):
+    def updatelrsliderLabel(self, value):        
+        """
+        Displays current value on leaf-radius-slider change.
+        Parameters
+        ----------
+        self : 
+            class instance
+        value :
+            Current slider value
+        
+        Returns
+        ----------
+        nothing
+        """
         self.lrsliderlabel.setText(str(value))
 
     def updatessSliderLabel(self, value):
+        """
+        Displays current value on step-size-slider change.
+        Parameters
+        ----------
+        self : 
+            class instance
+        value :
+            Current slider value
+        
+        Returns
+        ----------
+        nothing
+        """
         self.sssliderabel.setText(str(value))
 
     def updatescrsizeSliderLabel(self, value):
+        """
+        Displays current value on screen-size-slider change.
+        Parameters
+        ----------
+        self : 
+            class instance
+        value :
+            Current slider value
+        
+        Returns
+        ----------
+        nothing
+        """
         self.scrsizesliderlabel.setText(str(value))
 
     @pyqtSlot()
     def ongobtnClick(self):
+        """
+        Event handling for 'Go!' button click- collects widget values and calls L-System, Turtle modules.
+        Parameters
+        ----------
+        self : 
+            class instance
+        
+        Returns
+        ----------
+        nothing
+        """
         axiom = 'F'
         frule = self.frulebox.text()
         niter = self.numiterbox.value()
